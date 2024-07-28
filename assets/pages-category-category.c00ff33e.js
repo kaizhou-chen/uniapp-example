@@ -1,1 +1,0 @@
-import{d as a,o as s,c as e,w as t,m as o,i as r}from"./index-f8d96865.js";import{_ as c}from"./_plugin-vue_export-helper.1b428a4d.js";const d=c(a({__name:"category",setup:a=>(a,c)=>{const d=r;return s(),e(d,{class:"category"},{default:t((()=>[o("category")])),_:1})}}),[["__scopeId","data-v-a9bb4dd6"]]);export{d as default};
