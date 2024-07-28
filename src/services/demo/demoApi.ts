@@ -1,0 +1,44 @@
+import { bannerList, categoryList, hotList, guessLikePage } from "./demoData";
+import type { PageParams, PageResult } from "@/types/global";
+import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
+
+interface Data<T> {
+  code: string
+  msg: string
+  result: T
+}
+
+function mockRequest<T>(data: T) {
+  return new Promise<Data<T>>((resolve, reject) => {
+    const res = {
+      status: 200,
+      data: {
+        code: '1',
+        msg: 'success',
+        result: data
+      }
+    }
+
+    resolve(res.data as Data<T>);
+  })
+}
+
+// 首页-广告区域
+export const getHomeBannerAPI = (type = 1) => {
+  return mockRequest<any>(bannerList)
+}
+
+// 首页-前台分类-小程序
+export const getHomeCategoryAPI = () => {
+  return mockRequest<CategoryItem[]>(categoryList)
+}
+
+// 首页-热门推荐-小程序
+export const getHomeHotAPI = () => {
+  return mockRequest<HotItem[]>(hotList)
+}
+
+// 首页-猜你喜欢
+export const getHomeGuessLikeAPI = (data?: PageParams) => {
+  return mockRequest<PageResult<GuessItem>>(guessLikePage)
+}
