@@ -8,8 +8,8 @@ console.log('safeAreaInsets', safeAreaInsets)
   <view class="navbar" :style="{ 'padding-top': safeAreaInsets?.top + 'px'}">
     <!-- logo文字 -->
     <view class="logo">
-      <image class="logo-image" src="@/static/images/logo.png"></image>
-      <text class="logo-text">新鲜 · 亲民 · 快捷</text>
+      <text class="logo-title">uniapp-example</text>
+      <text class="logo-text">自定义导航栏</text>
     </view>
     <!-- 搜索条 -->
     <view class="search">
@@ -37,6 +37,10 @@ console.log('safeAreaInsets', safeAreaInsets)
     .logo-image {
       width: 166rpx;
       height: 39rpx;
+    }
+    .logo-title {
+      color: #fff;
+      line-height: 28rpx;
     }
     .logo-text {
       flex: 1;

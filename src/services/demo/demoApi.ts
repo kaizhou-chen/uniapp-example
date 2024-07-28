@@ -1,6 +1,19 @@
-import { bannerList, categoryList, hotList, guessLikePage } from "./demoData";
 import type { PageParams, PageResult } from "@/types/global";
 import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
+import type { HotResult } from '@/types/hot'
+
+import { 
+  bannerList, 
+  categoryList, 
+  hotList, 
+  guessLikePage, 
+  hotPreferenceResult,
+  hotInVogueResult,
+  hotOneStopResult, 
+  hotNewResult,
+} from "./demoData";
+
+type HotParams = PageParams & { subType?: string }
 
 interface Data<T> {
   code: string
@@ -19,7 +32,9 @@ function mockRequest<T>(data: T) {
       }
     }
 
-    resolve(res.data as Data<T>);
+    // mock 请求，返回复制的新对象，避免影响原始数据
+    const result = JSON.parse(JSON.stringify(res.data))
+    resolve(result as Data<T>);
   })
 }
 
@@ -41,4 +56,21 @@ export const getHomeHotAPI = () => {
 // 首页-猜你喜欢
 export const getHomeGuessLikeAPI = (data?: PageParams) => {
   return mockRequest<PageResult<GuessItem>>(guessLikePage)
+}
+
+// 通用热门推荐类型
+export const getHotRecommendAPI = (url: string, data?: HotParams) => {
+  let result = hotPreferenceResult
+
+  if (url === '/hot/preference') {
+    result = hotPreferenceResult
+  } else if (url === '/hot/inVogue') {
+    result = hotInVogueResult
+  } else if (url === '/hot/oneStop') {
+    result = hotOneStopResult
+  } else if (url === '/hot/new') {
+    result = hotNewResult
+  }
+
+ return mockRequest<HotResult>(result)
 }
