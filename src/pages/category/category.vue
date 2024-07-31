@@ -5,6 +5,7 @@ import MySwiper from '@/components/MySwiper.vue'
 import { getHomeBannerAPI, getCategoryTopAPI } from '@/services/apiFactory'
 import type { BannerItem } from '@/types/home'
 import type { CategoryTopItem } from "@/types/category";
+import PageSkeleton from './components/PageSkeleton.vue'
 
 // 获取轮播图数据
 const bannerList = ref<BannerItem[]>()
@@ -21,9 +22,15 @@ const getCategoryTopData = async () => {
   categoryList.value = res.result
 }
 
-onLoad(() => {
-  getHomeBannerData()
-  getCategoryTopData()
+// 是否数据加载完毕
+const isFinish = ref(false)
+
+onLoad(async () => {
+  await Promise.all([
+    getHomeBannerData(),
+    getCategoryTopData()
+  ])
+  isFinish.value = true
 })
 
 // 提取当前二级分类数据
@@ -33,7 +40,7 @@ const subCategoryList = computed(() => {
 </script>
 
 <template>
-  <view class="viewport">
+  <view class="viewport" v-if="isFinish">
     <!-- 搜索框 -->
     <view class="search">
       <view class="input">
@@ -84,6 +91,8 @@ const subCategoryList = computed(() => {
       </scroll-view>
     </view>
   </view>
+
+  <PageSkeleton v-else></PageSkeleton>
 </template>
 
 <style lang="scss">

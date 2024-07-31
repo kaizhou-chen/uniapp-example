@@ -31,3 +31,7 @@ export const getHotRecommendAPI = (url: string, data?: HotParams) => {
 export const getCategoryTopAPI = () => {
   return factory.getCategoryTopAPI()
 }
+
+export const getGoodsByIdAPI = (id: string) => {
+  return factory.getGoodsByIdAPI(id)
+}

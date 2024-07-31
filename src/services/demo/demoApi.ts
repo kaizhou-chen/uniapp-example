@@ -73,3 +73,12 @@ export const getHotRecommendAPI = (url: string, data?: HotParams) => {
 export const getCategoryTopAPI = () => {
   return mockRequest<CategoryTopItem[]>(categoryTopResult)
 }
+
+/**
+ * 商品详情
+ * @param id 
+ * @returns 
+ */
+export const getGoodsByIdAPI = (id: string) => {
+  return mockRequest([])
+}
