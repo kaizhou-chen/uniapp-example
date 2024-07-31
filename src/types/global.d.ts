@@ -24,7 +24,7 @@ export type PageParams = {
 /** 通用商品类型 */
 export type GoodsItem = {
   /** 商品描述 */
-  desc: string
+  desc: string | null
   /** 商品折扣 */
   discount?: number | string
   /** id */

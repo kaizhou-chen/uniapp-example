@@ -1,17 +1,12 @@
 import type { PageParams, PageResult } from "@/types/global";
 import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
 import type { HotResult } from '@/types/hot'
+import type { CategoryTopItem } from "@/types/category";
 
-import { 
-  bannerList, 
-  categoryList, 
-  hotList, 
-  guessLikePage, 
-  hotPreferenceResult,
-  hotInVogueResult,
-  hotOneStopResult, 
-  hotNewResult,
-} from "./demoData";
+import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
+import { hotPreferenceResult, hotInVogueResult, hotOneStopResult, hotNewResult } from './data/hot'
+import { categoryTopResult } from './data/category'
+
 
 type HotParams = PageParams & { subType?: string }
 
@@ -73,4 +68,8 @@ export const getHotRecommendAPI = (url: string, data?: HotParams) => {
   }
 
  return mockRequest<HotResult>(result)
+}
+
+export const getCategoryTopAPI = () => {
+  return mockRequest<CategoryTopItem[]>(categoryTopResult)
 }

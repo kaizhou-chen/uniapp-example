@@ -27,3 +27,7 @@ export const getHomeGuessLikeAPI = (data?: PageParams) => {
 export const getHotRecommendAPI = (url: string, data?: HotParams) => {
   return factory.getHotRecommendAPI(url, data)
 }
+
+export const getCategoryTopAPI = () => {
+  return factory.getCategoryTopAPI()
+}
