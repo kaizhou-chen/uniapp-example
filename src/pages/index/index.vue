@@ -2,7 +2,7 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 
-import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/apiFactory'
+import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/demo/demoApi'
 import type { CategoryItem, HotItem } from '@/types/home'
 import type { MyGuessInstance } from '@/types/component'
 import MySwiper from '@/components/MySwiper.vue'

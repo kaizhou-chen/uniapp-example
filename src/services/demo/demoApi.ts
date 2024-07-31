@@ -3,11 +3,14 @@ import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
 import type { HotResult } from '@/types/hot'
 import type { CategoryTopItem } from "@/types/category";
 import type { GoodsResult } from "@/types/goods";
+import type { LoginResult } from "@/types/member";
 
 import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
 import { hotPreferenceResult, hotInVogueResult, hotOneStopResult, hotNewResult } from './data/hot'
 import { categoryTopResult } from './data/category'
 import { goodsDetail } from "./data/_goodsDetail";
+import { loginResult } from "./data/login";
+
 
 type HotParams = PageParams & { subType?: string }
 
@@ -71,6 +74,7 @@ export const getHotRecommendAPI = (url: string, data?: HotParams) => {
  return mockRequest<HotResult>(result)
 }
 
+// 分类列表
 export const getCategoryTopAPI = () => {
   return mockRequest<CategoryTopItem[]>(categoryTopResult)
 }
@@ -83,3 +87,22 @@ export const getCategoryTopAPI = () => {
 export const getGoodsByIdAPI = (id: string) => {
   return mockRequest<GoodsResult>(goodsDetail)
 }
+
+type LoginParams = {
+  code: string
+  encryptedData: string
+  iv: string
+}
+export const postLoginWxMinAPI = (data: LoginParams) => {
+  return mockRequest<LoginResult>(loginResult)
+}
+
+/**
+ * 模拟登录
+ * @param phoneNumber 手机号码
+ * @returns 
+ */
+export const postLoginWxMinSimpleAPI = (phoneNumber: string) => {
+  return mockRequest<LoginResult>(loginResult)
+}
+

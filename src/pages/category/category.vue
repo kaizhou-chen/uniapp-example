@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MySwiper from '@/components/MySwiper.vue'
-import { getHomeBannerAPI, getCategoryTopAPI } from '@/services/apiFactory'
+import { getHomeBannerAPI, getCategoryTopAPI } from '@/services/demo/demoApi'
 import type { BannerItem } from '@/types/home'
 import type { CategoryTopItem } from "@/types/category";
 import PageSkeleton from './components/PageSkeleton.vue'
