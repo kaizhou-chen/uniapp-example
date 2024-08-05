@@ -42,6 +42,7 @@ const resetData = () => {
 }
 
 onMounted(() => {
+  console.log('onMounted')
   getHomeGuessLikeData();
 })
 

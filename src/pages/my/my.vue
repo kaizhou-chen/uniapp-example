@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useMemberStore } from '@/stores/index'
+import MyGuess from '@/components/MyGuess.vue'
+import { useGuessList } from '@/composables/index'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -12,10 +15,13 @@ const orderTypes = [
 ]
 
 const memberStore = useMemberStore()
+
+// 获取猜你喜欢组件实例
+const { guessRef, onScrolltolower } = useGuessList()
 </script>
 
 <template>
-  <scroll-view class="viewport" scroll-y enable-back-to-top>
+  <scroll-view @scrolltolower="onScrolltolower" class="viewport" scroll-y enable-back-to-top>
     <!-- 个人资料 -->
     <view class="profile" :style="{ paddingTop: safeAreaInsets!.top + 'px' }">
       <!-- 情况1：已登录 -->
@@ -84,7 +90,7 @@ const memberStore = useMemberStore()
     </view>
     <!-- 猜你喜欢 -->
     <view class="guess">
-      <XtxGuess ref="guessRef" />
+      <MyGuess ref="guessRef"></MyGuess>
     </view>
   </scroll-view>
 </template>
