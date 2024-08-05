@@ -108,6 +108,14 @@
 					"style": {
 						"navigationBarTitleText": "设置"
 					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationBarTitleText": "个人信息",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white"
+					}
 				}
 			]
 		}
@@ -116,7 +124,9 @@
 	"preloadRule": {
 		"pages/my/my": { // 进入这个页面时
 			"network": "all",
-			"packages": ["pagesMember"] // 预下载 subPackages 里配置的子包 pagesMember
+			"packages": [
+				"pagesMember"
+			] // 预下载 subPackages 里配置的子包 pagesMember
 		}
 	}
 }

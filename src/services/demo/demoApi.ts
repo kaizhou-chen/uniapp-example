@@ -3,13 +3,15 @@ import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
 import type { HotResult } from '@/types/hot'
 import type { CategoryTopItem } from "@/types/category";
 import type { GoodsResult } from "@/types/goods";
-import type { LoginResult } from "@/types/member";
+import type { ProfileDetail, LoginResult, ProfileParams } from "@/types/member";
 
+import { http } from '@/utils/http'
 import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
 import { hotPreferenceResult, hotInVogueResult, hotOneStopResult, hotNewResult } from './data/hot'
 import { categoryTopResult } from './data/category'
 import { goodsDetail } from "./data/_goodsDetail";
 import { loginResult } from "./data/login";
+import { profileResult } from './data/profile'
 
 
 type HotParams = PageParams & { subType?: string }
@@ -39,6 +41,13 @@ function mockRequest<T>(data: T) {
 
 // 首页-广告区域
 export const getHomeBannerAPI = (type = 1) => {
+  try {
+    http<any[]>({
+      method: 'GET',
+      url: '/home/banner'
+    })
+  } catch(e) {}
+  
   return mockRequest<any>(bannerList)
 }
 
@@ -106,3 +115,20 @@ export const postLoginWxMinSimpleAPI = (phoneNumber: string) => {
   return mockRequest<LoginResult>(loginResult)
 }
 
+/**
+ * 个人信息
+ * @returns 
+ */
+export const getMemberProfileAPI = () => {
+  return mockRequest<ProfileDetail>(profileResult)
+}
+
+/**
+ * 修改个人信息
+ * @param data 
+ * @returns 
+ */
+export const putMemberProfileAPI = (data: ProfileParams) => {
+  Object.assign(profileResult, data)
+  return mockRequest({})
+}
