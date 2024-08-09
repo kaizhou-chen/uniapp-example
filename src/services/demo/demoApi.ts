@@ -154,17 +154,45 @@ export const postMemberAddressAPI = (data: AddressParams) => {
   return mockRequest({})
 }
 
+/**
+ * 获取收货地址
+ * @returns 
+ */
 export const getMemberAddressAPI = () => {
   return mockRequest<AddressItem[]>(addressList)
 }
 
+/**
+ * 查询收货地址
+ * @param id 
+ * @returns 
+ */
 export const getMemberAddressByIdAPI = (id: string) => {
   const result = addressList.find(x => x.id === id)
   return mockRequest<AddressItem>(result!)
 }
 
+/**
+ * 修改收货地址
+ * @param id 
+ * @param data 
+ * @returns 
+ */
 export const putMemberAddressByIdAPI = (id: string, data: AddressParams) => {
   const address = addressList.find(x => x.id === id)
   Object.assign(address!, data)
+  return mockRequest({})
+}
+
+/**
+ * 删除收货地址
+ * @param id 
+ * @param data 
+ * @returns 
+ */
+export const deleteMemberAddressByIdAPI = (id: string) => {
+  const index = addressList.findIndex(x => x.id === id)
+  console.log('index', index)
+  addressList.splice(index, 1)
   return mockRequest({})
 }
