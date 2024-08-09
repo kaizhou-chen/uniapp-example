@@ -4,6 +4,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import type { ProfileDetail, Gender } from '@/types/member'
 import { getMemberProfileAPI, putMemberProfileAPI } from '@/services/demo/demoApi'
 import { useMemberStore } from '@/stores'
+import { profileResult } from '@/services/demo/data/profile'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -31,6 +32,8 @@ const onAvatarChange = () => {
     mediaType: ['image'],
     success: (res) => {
       const { tempFilePath } = res.tempFiles[0]
+      memberStore.profile!.avatar = tempFilePath
+      profileResult.avatar = tempFilePath;
 
       // 文件上传
       uni.uploadFile({
@@ -41,7 +44,6 @@ const onAvatarChange = () => {
           if (res.statusCode === 200) {
             const data = JSON.parse(res.data)
             profile.value!.avatar = data.avatar
-            memberStore.profile!.avatar = tempFilePath
             uni.showToast({icon: 'success', title: '更新成功'})
           } else {
             uni.showToast({icon: 'error', title: '更新失败'})
@@ -52,20 +54,45 @@ const onAvatarChange = () => {
   })
 }
 
+// 修改性别
+const onGenderChange: UniHelper.RadioGroupOnChange = (e) => {
+  profile.value.gender = e.detail.value as Gender
+}
+
+// 修改生日
+const onBirthdayChange: UniHelper.DatePickerOnChange = (e) => {
+  profile.value.birthday = e.detail.value
+}
+
+// 修改城市
+let fullLocationCode:[string, string, string] = ['', '', '']
+const onFullLocationChange: UniHelper.RegionPickerOnChange = (e) => {
+  // 修改前端界面
+  profile.value.fullLocation = e.detail.value.join(' ')
+  // 提交后端更新
+  fullLocationCode = e.detail.code!
+}
+
 // 点击保存提交表单
 const onSubmit = async () => {
+  const { nickname, gender, birthday, fullLocation, profession } = profile.value
+  const [ provinceCode, cityCode, countyCode] = fullLocationCode
   const res = await putMemberProfileAPI({
-    nickname: profile.value?.nickname,
-    gender: profile.value.gender
+    nickname,
+    gender,
+    birthday,
+    fullLocation,
+    provinceCode,
+    cityCode,
+    countyCode,
+    profession
   })
 
   memberStore.profile!.nickname = profile.value.nickname
   uni.showToast({icon: 'success', title: '更新成功'})
-  uni.navigateBack()
-}
-
-const onGenderChange: UniHelper.RadioGroupOnChange = (e) => {
-  profile.value.gender = e.detail.value as Gender
+  setTimeout(() => {
+    uni.navigateBack()
+  }, 500)
 }
 </script>
 
@@ -116,6 +143,7 @@ const onGenderChange: UniHelper.RadioGroupOnChange = (e) => {
             start="1900-01-01"
             :end="new Date()"
             :value="profile?.birthday"
+            @change="onBirthdayChange"
           >
             <view v-if="profile?.birthday">{{ profile.birthday }}</view>
             <view class="placeholder" v-else>请选择日期</view>
@@ -123,14 +151,19 @@ const onGenderChange: UniHelper.RadioGroupOnChange = (e) => {
         </view>
         <view class="form-item">
           <text class="label">城市</text>
-          <picker class="picker" mode="region" :value="profile?.fullLocation?.split(' ')">
+          <picker 
+            class="picker" 
+            mode="region" 
+            :value="profile?.fullLocation?.split(' ')"
+            @change="onFullLocationChange"
+          >
             <view v-if="profile?.fullLocation">{{ profile.fullLocation }}</view>
             <view class="placeholder" v-else>请选择城市</view>
           </picker>
         </view>
         <view class="form-item">
           <text class="label">职业</text>
-          <input class="input" type="text" placeholder="请填写职业" :value="profile?.profession" />
+          <input class="input" type="text" placeholder="请填写职业" v-model="profile.profession" />
         </view>
       </view>
       <!-- 提交按钮 -->
