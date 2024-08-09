@@ -1,4 +1,4 @@
-import type { AddressParams } from '@/types/address'
+import type { AddressItem } from '@/types/address'
 
-export let addressList: AddressParams[] = [];
+export let addressList: AddressItem[] = [];
 

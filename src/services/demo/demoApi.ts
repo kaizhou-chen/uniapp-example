@@ -4,7 +4,7 @@ import type { HotResult } from '@/types/hot'
 import type { CategoryTopItem } from "@/types/category";
 import type { GoodsResult } from "@/types/goods";
 import type { ProfileDetail, LoginResult, ProfileParams } from "@/types/member";
-import type { AddressParams } from '@/types/address'
+import type { AddressParams, AddressItem } from '@/types/address'
 
 import { http } from '@/utils/http'
 import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
@@ -135,7 +135,36 @@ export const putMemberProfileAPI = (data: ProfileParams) => {
   return mockRequest({})
 }
 
+/**
+ * 添加收货地址
+ * @param data 
+ * @returns 
+ */
 export const postMemberAddressAPI = (data: AddressParams) => {
-  addressList.push(data)
+  if (data.isDefault) {
+    addressList.forEach(x => {
+      x.isDefault = 0
+    })
+  }
+
+  addressList.push({
+    id: String(new Date().getTime()),
+    ...data
+  })
+  return mockRequest({})
+}
+
+export const getMemberAddressAPI = () => {
+  return mockRequest<AddressItem[]>(addressList)
+}
+
+export const getMemberAddressByIdAPI = (id: string) => {
+  const result = addressList.find(x => x.id === id)
+  return mockRequest<AddressItem>(result!)
+}
+
+export const putMemberAddressByIdAPI = (id: string, data: AddressParams) => {
+  const address = addressList.find(x => x.id === id)
+  Object.assign(address!, data)
   return mockRequest({})
 }
