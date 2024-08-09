@@ -4,6 +4,7 @@ import type { HotResult } from '@/types/hot'
 import type { CategoryTopItem } from "@/types/category";
 import type { GoodsResult } from "@/types/goods";
 import type { ProfileDetail, LoginResult, ProfileParams } from "@/types/member";
+import type { AddressParams } from '@/types/address'
 
 import { http } from '@/utils/http'
 import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
@@ -12,6 +13,7 @@ import { categoryTopResult } from './data/category'
 import { goodsDetail } from "./data/_goodsDetail";
 import { loginResult } from "./data/login";
 import { profileResult } from './data/profile'
+import { addressList } from './data/address'
 
 
 type HotParams = PageParams & { subType?: string }
@@ -130,5 +132,10 @@ export const getMemberProfileAPI = () => {
  */
 export const putMemberProfileAPI = (data: ProfileParams) => {
   Object.assign(profileResult, data)
+  return mockRequest({})
+}
+
+export const postMemberAddressAPI = (data: AddressParams) => {
+  addressList.push(data)
   return mockRequest({})
 }
