@@ -196,3 +196,11 @@ export const deleteMemberAddressByIdAPI = (id: string) => {
   addressList.splice(index, 1)
   return mockRequest({})
 }
+
+/**
+ * 加入购物车
+ * @param data 
+ */
+export const postMemberCartAPI = (data: { skuId: string, count: number }) => {
+  return mockRequest({})
+}
