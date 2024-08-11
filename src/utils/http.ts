@@ -18,6 +18,7 @@ const baseURL = 'http://localhost:8090/uni-app';
 const httpInterceptor = {
   // 拦截前触发
   invoke(options: UniApp.RequestOptions) {
+    console.log('httpInterceptor invoke')
     // 1. 非 http 开头需拼接地址
     if (!options.url.startsWith('http')) {
       options.url = baseURL + options.url

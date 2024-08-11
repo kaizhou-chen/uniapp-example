@@ -1,17 +1,20 @@
 import type { PageParams, PageResult } from "@/types/global";
 import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
 import type { HotResult } from '@/types/hot'
+import type { CategoryTopItem } from "@/types/category";
+import type { GoodsResult } from "@/types/goods";
+import type { ProfileDetail, LoginResult, ProfileParams } from "@/types/member";
+import type { AddressParams, AddressItem } from '@/types/address'
 
-import { 
-  bannerList, 
-  categoryList, 
-  hotList, 
-  guessLikePage, 
-  hotPreferenceResult,
-  hotInVogueResult,
-  hotOneStopResult, 
-  hotNewResult,
-} from "./demoData";
+import { http } from '@/utils/http'
+import { bannerList, categoryList, hotList, guessLikePage } from './data/home'
+import { hotPreferenceResult, hotInVogueResult, hotOneStopResult, hotNewResult } from './data/hot'
+import { categoryTopResult } from './data/category'
+import { goodsDetail } from "./data/_goodsDetail";
+import { loginResult } from "./data/login";
+import { profileResult } from './data/profile'
+import { addressList } from './data/address'
+
 
 type HotParams = PageParams & { subType?: string }
 
@@ -40,6 +43,13 @@ function mockRequest<T>(data: T) {
 
 // 首页-广告区域
 export const getHomeBannerAPI = (type = 1) => {
+  try {
+    http<any[]>({
+      method: 'GET',
+      url: '/home/banner'
+    })
+  } catch(e) {}
+  
   return mockRequest<any>(bannerList)
 }
 
@@ -73,4 +83,124 @@ export const getHotRecommendAPI = (url: string, data?: HotParams) => {
   }
 
  return mockRequest<HotResult>(result)
+}
+
+// 分类列表
+export const getCategoryTopAPI = () => {
+  return mockRequest<CategoryTopItem[]>(categoryTopResult)
+}
+
+/**
+ * 商品详情
+ * @param id 
+ * @returns 
+ */
+export const getGoodsByIdAPI = (id: string) => {
+  return mockRequest<GoodsResult>(goodsDetail)
+}
+
+type LoginParams = {
+  code: string
+  encryptedData: string
+  iv: string
+}
+export const postLoginWxMinAPI = (data: LoginParams) => {
+  return mockRequest<LoginResult>(loginResult)
+}
+
+/**
+ * 模拟登录
+ * @param phoneNumber 手机号码
+ * @returns 
+ */
+export const postLoginWxMinSimpleAPI = (phoneNumber: string) => {
+  return mockRequest<LoginResult>(loginResult)
+}
+
+/**
+ * 个人信息
+ * @returns 
+ */
+export const getMemberProfileAPI = () => {
+  return mockRequest<ProfileDetail>(profileResult)
+}
+
+/**
+ * 修改个人信息
+ * @param data 
+ * @returns 
+ */
+export const putMemberProfileAPI = (data: ProfileParams) => {
+  Object.assign(profileResult, data)
+  return mockRequest({})
+}
+
+/**
+ * 添加收货地址
+ * @param data 
+ * @returns 
+ */
+export const postMemberAddressAPI = (data: AddressParams) => {
+  if (data.isDefault) {
+    addressList.forEach(x => {
+      x.isDefault = 0
+    })
+  }
+
+  addressList.push({
+    id: String(new Date().getTime()),
+    ...data
+  })
+  return mockRequest({})
+}
+
+/**
+ * 获取收货地址
+ * @returns 
+ */
+export const getMemberAddressAPI = () => {
+  return mockRequest<AddressItem[]>(addressList)
+}
+
+/**
+ * 查询收货地址
+ * @param id 
+ * @returns 
+ */
+export const getMemberAddressByIdAPI = (id: string) => {
+  const result = addressList.find(x => x.id === id)
+  return mockRequest<AddressItem>(result!)
+}
+
+/**
+ * 修改收货地址
+ * @param id 
+ * @param data 
+ * @returns 
+ */
+export const putMemberAddressByIdAPI = (id: string, data: AddressParams) => {
+  const address = addressList.find(x => x.id === id)
+  Object.assign(address!, data)
+  return mockRequest({})
+}
+
+/**
+ * 删除收货地址
+ * @param id 
+ * @param data 
+ * @returns 
+ */
+export const deleteMemberAddressByIdAPI = (id: string) => {
+  const index = addressList.findIndex(x => x.id === id)
+  console.log('index', index)
+  addressList.splice(index, 1)
+  return mockRequest({})
+}
+
+/**
+ * 加入购物车
+ * @param data 
+ */
+export const postMemberCartAPI = (data: { skuId: string, count: number }) => {
+  return mockRequest({})
 }

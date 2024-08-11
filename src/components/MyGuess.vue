@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getHomeGuessLikeAPI } from '@/services/apiFactory';
+import { getHomeGuessLikeAPI } from '@/services/demo/demoApi';
 import type { GuessItem } from '@/types/home'
 import type { PageParams } from '@/types/global'
 
@@ -42,6 +42,7 @@ const resetData = () => {
 }
 
 onMounted(() => {
+  console.log('onMounted')
   getHomeGuessLikeData();
 })
 
