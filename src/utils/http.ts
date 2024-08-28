@@ -93,10 +93,12 @@ export const http = <T>(options: UniApp.RequestOptions) => {
       },
       // 响应失败
       fail(err) {
+        /*
         uni.showToast({
           icon: 'none',
           title: '网络错误，换个网络试试'
         })
+        */
         reject(err)
       }
     })

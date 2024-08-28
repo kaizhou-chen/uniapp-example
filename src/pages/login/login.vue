@@ -46,11 +46,13 @@ const loginSucess = (profile: LoginResult) => {
 
 <template>
   <view class="viewport">
+    <!--
     <view class="logo">
       <image
         src="https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/logo_icon.png"
       ></image>
     </view>
+    -->
     <view class="login">
       <!-- 网页端表单登录 -->
       <!-- <input class="input" type="text" placeholder="请输入用户名/手机号码" /> -->
@@ -58,10 +60,12 @@ const loginSucess = (profile: LoginResult) => {
       <!-- <button class="button phone">登录</button> -->
 
       <!-- 小程序端授权登录 -->
+      <!--
       <button class="button phone" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">
         <text class="icon icon-phone"></text>
         手机号快捷登录
       </button>
+      -->
       <view class="extra">
         <view class="caption">
           <text>其他登录方式</text>
