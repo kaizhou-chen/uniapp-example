@@ -11,14 +11,14 @@ defineProps<{
     <navigator
       v-for="item in list"
       :key="item.id"
-      
-      class="category-item"
       hover-class="none"
       url="/pages/category/category"
       open-type="switchTab"
     >
-      <image class="icon" :src="item.icon"></image>
-      <text class="text">{{ item.name }}</text>
+      <view class="category-item">
+        <image class="icon" :src="item.icon"></image>
+        <text class="text">{{ item.name }}</text>
+      </view>
     </navigator>
   </view>
 </template>
@@ -32,8 +32,7 @@ defineProps<{
   flex-wrap: wrap;
   min-height: 328rpx;
 
-  .category-item, 
-  .category-item a {
+  .category-item {
     width: 150rpx;
     display: flex;
     justify-content: center;
