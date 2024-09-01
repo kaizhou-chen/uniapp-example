@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { postMemberAddressAPI, getMemberAddressByIdAPI, putMemberAddressByIdAPI } from '@/services/demo/demoApi'
+import { postMemberAddressAPI, getMemberAddressByIdAPI, putMemberAddressByIdAPI } from '@/services/address'
 
 // 表单数据
 const form = ref({

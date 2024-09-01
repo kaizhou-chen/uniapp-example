@@ -1,14 +1,14 @@
 import type { PageParams, PageResult } from "@/types/global";
-import type { CategoryItem, GuessItem, HotItem } from "@/types/home";
+import type { BannerItem, CategoryItem, GuessItem, HotItem } from "@/types/home";
 import { http } from "@/utils/http";
 
 // 首页-广告区域
-export const getHomeBannerAPI = (type = 1) => {
-  return http({
+export const getHomeBannerAPI = (distributionSite = 1) => {
+  return http<BannerItem[]>({
     method: 'GET',
     url: '/home/banner',
     data: {
-      type
+      distributionSite
     }
   })
 }
@@ -17,7 +17,7 @@ export const getHomeBannerAPI = (type = 1) => {
 export const getHomeCategoryAPI = () => {
   return http<CategoryItem[]>({
     method: 'GET',
-    url: '/home/category/multi'
+    url: '/home/category/mutli'
   })
 }
 
@@ -25,7 +25,7 @@ export const getHomeCategoryAPI = () => {
 export const getHomeHotAPI = () => {
   return http<HotItem[]>({
     method: 'GET',
-    url: '/home/hot/multi'
+    url: '/home/hot/mutli'
   })
 }
 

@@ -2,9 +2,8 @@
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import type { ProfileDetail, Gender } from '@/types/member'
-import { getMemberProfileAPI, putMemberProfileAPI } from '@/services/demo/demoApi'
+import { getMemberProfileAPI, putMemberProfileAPI } from '@/services/profile'
 import { useMemberStore } from '@/stores'
-import { profileResult } from '@/services/demo/data/profile'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -32,8 +31,6 @@ const onAvatarChange = () => {
     mediaType: ['image'],
     success: (res) => {
       const { tempFilePath } = res.tempFiles[0]
-      memberStore.profile!.avatar = tempFilePath
-      profileResult.avatar = tempFilePath;
 
       // 文件上传
       uni.uploadFile({

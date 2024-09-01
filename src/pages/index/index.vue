@@ -1,16 +1,43 @@
-<script setup lang="ts">
-import { onLoad } from '@dcloudio/uni-app'
-import { ref } from 'vue'
+<template>
+  <!-- 自定义导航栏 -->
+  <CustomNavbar></CustomNavbar>
 
-import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/demo/demoApi'
+  <!-- 滚动容器 -->
+  <scroll-view class="scroll-view" 
+    scroll-y
+    refresher-enabled 
+    :refresher-triggered="isTriggered"
+    @refresherrefresh="onRefresherrefresh" 
+    @scrolltolower="onScrolltolower"
+  >
+    <!-- 骨架屏 -->
+    <PageSkeleton v-if="isLoading" />
+    <template v-else>
+      <!-- 自定义轮播图 -->
+      <MySwiper :list="bannerList"></MySwiper>
+      <!-- 分类面板 -->
+      <CategoryPanel :list="categoryList"></CategoryPanel>
+      <!-- 热门推荐 -->
+      <HotPanel :list="hotList"></HotPanel>
+      <!-- 猜你喜欢 -->
+      <MyGuess ref="guessRef"></MyGuess>
+    </template>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import type { CategoryItem, HotItem } from '@/types/home'
+import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/home'
+
+import { useGuessList } from '@/composables/index'
 import MySwiper from '@/components/MySwiper.vue'
 import MyGuess from '@/components/MyGuess.vue'
 import CustomNavbar from './components/CustomNavbar.vue'
 import CategoryPanel from './components/CategoryPanel.vue'
 import HotPanel from './components/HotPanel.vue'
 import PageSkeleton from './components/PageSkeleton.vue'
-import { useGuessList } from '@/composables/index'
 
 // 获取轮播图数据
 const bannerList = ref([])
@@ -69,33 +96,6 @@ const onRefresherrefresh = async () => {
   isTriggered.value = false
 }
 </script>
-
-<template>
-  <!-- 自定义导航栏 -->
-  <CustomNavbar></CustomNavbar>
-
-  <!-- 滚动容器 -->
-  <scroll-view class="scroll-view" 
-    scroll-y
-    refresher-enabled 
-    :refresher-triggered="isTriggered"
-    @refresherrefresh="onRefresherrefresh" 
-    @scrolltolower="onScrolltolower"
-  >
-    <!-- 骨架屏 -->
-    <PageSkeleton v-if="isLoading" />
-    <template v-else>
-      <!-- 自定义轮播图 -->
-      <MySwiper :list="bannerList"></MySwiper>
-      <!-- 分类面板 -->
-      <CategoryPanel :list="categoryList"></CategoryPanel>
-      <!-- 热门推荐 -->
-      <HotPanel :list="hotList"></HotPanel>
-      <!-- 猜你喜欢 -->
-      <MyGuess ref="guessRef"></MyGuess>
-    </template>
-  </scroll-view>
-</template>
 
 <style lang="scss">
 /** 设置页面底色 */

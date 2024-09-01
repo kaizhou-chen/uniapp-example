@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { getGoodsByIdAPI, postMemberCartAPI } from '@/services/demo/demoApi'
+import { getGoodsByIdAPI/*, postMemberCartAPI*/ } from '@/services/goods'
 import type { GoodsResult } from '@/types/goods'
 import type { SkuPopupLocaldata, SkuPopupInstance, SkuPopupEvent } from '@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup'
 import AddressPanel from './components/AddressPanel.vue'
@@ -101,10 +101,12 @@ const selectArrText = computed(() => {
 
 // 加入购物车
 const onAddCart = async (e: SkuPopupEvent) => {
+  /*
   await postMemberCartAPI({
     skuId: e._id,
     count: e.buy_num
   })
+    */
   uni.showToast({ title: '添加成功' })
   isShowSku.value = false
 }
