@@ -1,1 +1,0 @@
-import{a2 as e,l as s,a3 as t,a4 as r}from"./index-DCPBTn-6.js";const o=e("member",(()=>{const e=s();return{profile:e,setProfile:s=>{e.value=s},clearProfile:()=>{e.value=void 0}}}),{persist:{storage:{getItem:e=>t(e),setItem(e,s){r(e,s)}}}}),a=(e,s)=>{const t=e.__vccOpts||e;for(const[r,o]of s)t[r]=o;return t};export{a as _,o as u};
