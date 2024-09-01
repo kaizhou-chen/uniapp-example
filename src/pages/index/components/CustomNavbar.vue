@@ -8,8 +8,8 @@ console.log('safeAreaInsets', safeAreaInsets)
   <view class="navbar" :style="{ 'padding-top': safeAreaInsets?.top + 'px'}">
     <!-- logo文字 -->
     <view class="logo">
-      <text class="logo-title">uniapp-example</text>
-      <text class="logo-text">自定义导航栏</text>
+      <text class="logo-title">uni-app + vue 3 商城</text>
+      <text class="logo-text"></text>
     </view>
     <!-- 搜索条 -->
     <view class="search">

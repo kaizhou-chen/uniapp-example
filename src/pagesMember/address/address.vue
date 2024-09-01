@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import type { AddressItem } from '@/types/address'
-import { getMemberAddressAPI, deleteMemberAddressByIdAPI } from '@/services/demo/demoApi'
+import { getMemberAddressAPI, deleteMemberAddressByIdAPI } from '@/services/address'
 
 // 获取收货地址列表
 const addressList = ref<AddressItem[]>([])

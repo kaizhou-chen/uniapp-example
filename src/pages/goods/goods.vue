@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { getGoodsByIdAPI, postMemberCartAPI } from '@/services/demo/demoApi'
+import { getGoodsByIdAPI } from '@/services/goods'
+import { postMemberCartAPI } from '@/services/cart'
 import type { GoodsResult } from '@/types/goods'
 import type { SkuPopupLocaldata, SkuPopupInstance, SkuPopupEvent } from '@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup'
 import AddressPanel from './components/AddressPanel.vue'

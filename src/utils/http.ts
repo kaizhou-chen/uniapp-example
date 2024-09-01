@@ -12,13 +12,12 @@
 
 import { useMemberStore } from '@/stores'
 
-const baseURL = 'http://localhost:8090/uni-app';
+const baseURL = 'https://pcapi-xiaotuxian-front-devtest.itheima.net';
 
 // 添加拦截器
 const httpInterceptor = {
   // 拦截前触发
   invoke(options: UniApp.RequestOptions) {
-    console.log('httpInterceptor invoke')
     // 1. 非 http 开头需拼接地址
     if (!options.url.startsWith('http')) {
       options.url = baseURL + options.url
@@ -93,12 +92,10 @@ export const http = <T>(options: UniApp.RequestOptions) => {
       },
       // 响应失败
       fail(err) {
-        /*
         uni.showToast({
           icon: 'none',
           title: '网络错误，换个网络试试'
         })
-        */
         reject(err)
       }
     })

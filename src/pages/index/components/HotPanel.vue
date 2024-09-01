@@ -58,8 +58,15 @@ defineProps<{
     height: 254rpx;
     border-right: 1rpx solid #eee;
     border-top: 1rpx solid #eee;
+    box-sizing: border-box;
     .title {
       justify-content: start;
+      text {
+        white-space: nowrap;
+        &.title-desc {
+          overflow: hidden;
+        }
+      }
     }
     &:nth-child(2n) {
       border-right: 0 none;

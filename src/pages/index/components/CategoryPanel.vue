@@ -14,7 +14,8 @@ defineProps<{
       
       class="category-item"
       hover-class="none"
-      url="/pages/index/index"
+      url="/pages/category/category"
+      open-type="switchTab"
     >
       <image class="icon" :src="item.icon"></image>
       <text class="text">{{ item.name }}</text>

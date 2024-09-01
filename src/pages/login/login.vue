@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app'
-import { postLoginWxMinAPI, postLoginWxMinSimpleAPI } from '@/services/demo/demoApi'
+import { postLoginWxMinAPI, postLoginWxMinSimpleAPI } from '@/services/login'
 import { useMemberStore } from '@/stores'
 import type { LoginResult } from '@/types/member'
 
@@ -39,8 +39,9 @@ const loginSucess = (profile: LoginResult) => {
 
   // 页面跳转
   setTimeout(() => {
-    uni.switchTab({ url: '/pages/my/my' })
-  }, 500)
+    // uni.switchTab({ url: '/pages/my/my' })
+    uni.navigateBack()
+  }, 400)
 }
 </script>
 
