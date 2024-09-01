@@ -32,7 +32,8 @@ defineProps<{
   flex-wrap: wrap;
   min-height: 328rpx;
 
-  .category-item {
+  .category-item, 
+  .category-item a {
     width: 150rpx;
     display: flex;
     justify-content: center;
