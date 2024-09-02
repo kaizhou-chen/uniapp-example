@@ -83,6 +83,7 @@ const gotoPayment = () => {
     return
   }
   // 跳转到结算页
+  uni.navigateTo({ url: '/pagesOrder/create/create'})
 }
 </script>
 
@@ -179,7 +180,7 @@ const gotoPayment = () => {
 <style lang="scss">
 // 根元素
 :host {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
